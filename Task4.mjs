@@ -1,47 +1,44 @@
-let a = "red";
-let b = 0;
+const LIGHTS = {
+    RED:    { message: "STOP", duration: 3, next: "RED" },
+    GREEN:  { message: "GO",   duration: 4, next: "GREEN" },
+    YELLOW: { message: "SLOW", duration: 1, next: "YELLOW" },
+};
 
-function x() {
-  if (a == "red") {
-    console.log("STOP");
-    b = b + 1;
+let currentLight = "RED";
+let ticksInLight = 0;
 
-    if (b > 2) {
-      a = "green";
-      b = 0;
-    }
-  } else {
-    if (a == "green") {
-      console.log("GO");
-      b = b + 1;
+function tick() {
+    const light = LIGHTS[currentLight];
 
-      if (b > 3) {
-        a = "yellow";
-        b = 0;
-      }
-    } else {
-      if (a == "yellow") {
-        console.log("SLOW");
-        b = b + 1;
-
-        if (b > 0) {
-          a = "red";
-          b = 0;
-        }
-      } else {
+    if (!light) {
         console.log("BROKEN");
-        a = "red";
-        b = 0;
-      }
+        currentLight = "YELLOW";
+        ticksInLight = 0;
+        return;
     }
-  }
+
+    console.log(light.message);
+    ticksInLight++;
+
+    if (ticksInLight >= light.duration) {
+        currentLight = light.next;
+        ticksInLight = 0;
+    }
 }
 
-x();
-x();
-x();
-x();
-x();
-x();
-x();
-x();
+for (let i = 0; i < 8; i++) tick();
+
+/* Explanation:
+The names; a,b,c are gone and replaced by: currentLight, ticksInLight and tick.
+
+Data instead of if/else functions. Everything is in the LIGHTS object;
+how long the lights last, what comes next and a message according to the light color.
+
+The code has been shortened significantly by only using "lookup and transition check"
+
+Easy to add more color or effects to the lights
+
+It is a loop instead of the "x();". Makes it easier to change the ticks to whatever you want.
+
+Changed the "broken" light to yellow to match the real world.
+*/
