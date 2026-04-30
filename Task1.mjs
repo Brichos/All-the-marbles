@@ -51,21 +51,20 @@ console.log(highScore);
 
 //C
 
- const presentCount = 0;
- const defaultStatus = { present: false };
+ let presentCount = 0;
 
  function registerAttendance (students) {
     return students.map((student) => {
-    if (!student.status) {
-    student.status = defaultStatus;
+        if (!student.status) {
+            student.status = {present : false};
     }
 
-    if ((student.status.present = true)) {
-    presentCount++;
-
+    if ((student.status.present === true)) {
+        presentCount++;
+        return student.name + " is present"
     }
 
-        return student.name + " is present";
+        return student.name + " is absent";
     });
  }
  
@@ -79,3 +78,10 @@ console.log(registerAttendance (students));
 console.log(presentCount);
 console.log(students);
 
+/* Explanation
+1. "const presentCount" into "presentCount++" - you cant change a const. Crashes the script
+
+2. "student.status.present = true" the "=" assigns instead of compares which marks everyone as "present"
+
+3. "student.status = defaultStatus" - this makes all students share one object, so changing one changes all of them
+*/
