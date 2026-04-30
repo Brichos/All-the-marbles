@@ -51,3 +51,31 @@ console.log(highScore);
 
 //C
 
+ const presentCount = 0;
+ const defaultStatus = { present: false };
+
+ function registerAttendance (students) {
+    return students.map((student) => {
+    if (!student.status) {
+    student.status = defaultStatus;
+    }
+
+    if ((student.status.present = true)) {
+    presentCount++;
+
+    }
+
+        return student.name + " is present";
+    });
+ }
+ 
+ const students = [
+    { name: "Ava" },
+    { name: "Noah", status: { present: false } },
+    { name: "Mia", status: { present: true } },
+ ];
+
+console.log(registerAttendance (students));
+console.log(presentCount);
+console.log(students);
+
