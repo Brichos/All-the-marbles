@@ -19,4 +19,21 @@ this makes the result NaN.
 
 //B
 
+let highScore = 0;
+let players = [];
+
+function updateScores(name, points) {
+    players.push(name);
+
+    if (points > highScore)
+        highScore = points;
+
+    return name + " now has " + points += 10;
+}
+
+console.log(updateScores("Tony", 40));
+console.log(updateScores("Tony", 50));
+console.log(updateScores("Rony", 150));
+console.log(players);
+console.log(highScore);
 //C
